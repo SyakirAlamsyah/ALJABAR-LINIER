@@ -2,6 +2,14 @@
 #include <vector>
 using namespace std;
 
+void clearScreen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 double abso(double value) {
     return (value < 0) ? -value : value;
 }
@@ -36,7 +44,7 @@ double power(double base, int exponent) {
 // Fungsi 1: Untuk mengisi elemen vektor
 
 void inputVektor(vector<double>& vec, string namaVektor) {
-    cout << "Masukkan elemen-elemen vektor " << namaVektor << " (total " << vec.size() << " elemen):" << endl;
+    cout << "\nMasukkan elemen-elemen vektor " << namaVektor << " (total " << vec.size() << " elemen):" << endl;
     for (int i = 0; i < vec.size(); i++) {
         cout << "Elemen ke-" << (i + 1) << ": ";
         cin >> vec[i];
@@ -47,8 +55,9 @@ void inputVektor(vector<double>& vec, string namaVektor) {
 double hitungNorma(const vector<double>& vec) {
     double sum = 0.0;
     for (int i = 0; i < vec.size(); i++) {
-        sum += power(vec[i], 2); // Menggunakan fungsi pow dari <cmath>
+        sum += power(vec[i], 2); 
     }
+    return sqrt(sum); 
 }
 
 // Fungsi 3: Menghitung Dot Product
@@ -89,6 +98,11 @@ void analisisVektor(double dotProduct, double normaU, double normaV) {
 
 // --- FUNGSI UTAMA (MAIN) ---
 int main() {
+    string cheek;
+
+    do{   
+    clearScreen();
+
     int n;
     
     cout << "Program Operasi & Analisis Vektor Euclidean" << endl;
@@ -118,12 +132,16 @@ int main() {
     double dotProd = hitungDotProduct(u, v);
 
     // 5. Tampilkan Hasil Perhitungan (Soal Poin 1)
-    cout << "Norma ||u|| \t: " << normU << endl;
+    cout << "\nNorma ||u|| \t: " << normU << endl;
     cout << "Norma ||v|| \t: " << normV << endl;
     cout << "Dot Product \t: " << dotProd << endl;
 
-   ~
+ 
     analisisVektor(dotProd, normU, normV);
 
-    return 0;
+    cout<<"\nApakah Anda ingin mengulangi program? (y/n): ";
+    cin>> cheek;
+
+    } while (cheek == "y" || cheek == "Y");
+return 0;
 }
