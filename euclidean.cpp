@@ -2,6 +2,8 @@
 #include <vector>
 using namespace std;
 
+const int batas = 10;
+
 void clearScreen() {
     #ifdef _WIN32
         system("cls");
@@ -9,7 +11,7 @@ void clearScreen() {
         system("clear");
     #endif
 }
-
+// saya membuat fungsi tersendiri untuk menggant pustaka cmath
 double abso(double value) {
     return (value < 0) ? -value : value;
 }
@@ -92,13 +94,13 @@ void analisisVektor(double dotProduct, double normaU, double normaV) {
     } else if (abso(cosTheta) < epsilon) {
         cout << "Vektor saling tegak lurus (orthogonal)." << endl;
     } else {
-        cout << "Vektor tidak sejajar dan tidak tegak lurus." << endl;
+        cout << "Vektor membentuk sudut tertentu" << endl;
     }
 }
 
 // --- FUNGSI UTAMA (MAIN) ---
 int main() {
-    string cheek;
+    string cek;
 
     do{   
     clearScreen();
@@ -113,8 +115,8 @@ int main() {
     cin >> n;
 
     // Validasi dimensi
-    if (n < 2) {
-        cout << "Dimensi minimal 2." << endl;
+    if (n < 2 || n > batas) {
+        cout << "Dimensi minimal 2 dan maksimal 10" << endl;
         return 1;
     }
 
@@ -140,8 +142,8 @@ int main() {
     analisisVektor(dotProd, normU, normV);
 
     cout<<"\nApakah Anda ingin mengulangi program? (y/n): ";
-    cin>> cheek;
+    cin>> cek;
 
-    } while (cheek == "y" || cheek == "Y");
+    } while (cek == "y" || cek == "Y");
 return 0;
 }
